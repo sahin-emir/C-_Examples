@@ -1,0 +1,26 @@
+# İç İçe For Örneği
+
+            for (int i = 1; i <=5; i++)
+            {
+                for (int j = 1; j <= 3; j++)
+                {
+
+                    Console.WriteLine("ahmet");
+                }
+
+                Console.WriteLine("Oya");
+
+            }
+            
+            # Çarpma Örneği
+            for (int i = 1; i <=10; i++)
+            {
+                for (int j = 1; j <=10; j++)
+                {
+
+                    Console.WriteLine(i+"*"+j+"="+i*j);
+                }
+
+                
+
+            }
