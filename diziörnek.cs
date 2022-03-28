@@ -41,3 +41,14 @@ int[,] dizi = new int[3, 3];
 
             Console.ReadLine();
         }
+
+
+//// Başka char örneği 
+             string ad = "bilimsel";
+            char[] adi = { 'b', 'i', 'l', 'i', 'm' };
+
+            for (int i = 0; i <ad.Length; i++)
+            {
+                Console.WriteLine(ad[i]);
+            }
+            Console.ReadLine();
