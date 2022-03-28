@@ -52,3 +52,34 @@ int[,] dizi = new int[3, 3];
                 Console.WriteLine(ad[i]);
             }
             Console.ReadLine();
+
+//// dizide pozitif negatif ayırma
+ int n = 0;
+            int negatif = 0, pozitif = 0;
+
+            n = Convert.ToInt32(Console.ReadLine());
+            int[] sayilar = new int[n];
+
+            
+
+            for (int i = 0; i <sayilar.Length ; i++)
+            {
+                Console.Write("Sayıyı giriniz..:");
+                sayilar[i] = Convert.ToInt32(Console.ReadLine());
+
+                if (sayilar[i] < 0)
+                { 
+                    negatif++;
+                }
+                else if (sayilar[i] > 0)
+                { 
+                    pozitif++;
+                }
+
+            }
+            Console.WriteLine();
+            Console.WriteLine("******************");
+            Console.WriteLine("Negatif Sayı Adeti : {0}", negatif);
+            Console.WriteLine("Pozitif Sayı Adeti : {0}", pozitif);
+
+            Console.ReadKey();
