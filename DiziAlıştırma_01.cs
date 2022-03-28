@@ -20,3 +20,29 @@ class HelloWorld {
         }
   }
 }
+while (true)
+            {
+                int dogrucevap = rnd.Next(1, 10);
+                Console.WriteLine("Sayı tahmin et 1- 10 arası");
+                sayi = Convert.ToInt32(Console.ReadLine());
+
+                if (sayi == dogrucevap)
+                {
+                    Console.WriteLine("dogru bildiniz");
+                    break;
+                }
+                else if (sayi < dogrucevap )
+                {
+                    Console.WriteLine("sayıyı büyült");
+
+                }
+                else if (sayi > dogrucevap)
+                {
+                    Console.WriteLine("sayıyı küçült");
+
+                }
+                else
+                {
+                    Console.WriteLine("1- 10 arası grinbiz");
+                }
+            }
