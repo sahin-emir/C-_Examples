@@ -83,3 +83,38 @@ int[,] dizi = new int[3, 3];
             Console.WriteLine("Pozitif Sayı Adeti : {0}", pozitif);
 
             Console.ReadKey();
+
+///dizide aranacak kelişme bulma
+string[] isimler = new string[5];
+            string anahtar;
+
+            int i;
+
+            isimler[0] = "Ahmet";
+            isimler[1] = "Alş";
+            isimler[2] = "Furkan";
+            isimler.SetValue( "Halil" ,3 );
+            isimler.SetValue ( "Kadir",4 );
+
+            Array.Sort(isimler);
+
+            Console.WriteLine("aranacak kelime giriniz");
+            anahtar = Console.ReadLine();
+
+
+            anahtar.Trim();
+
+            i = Array.BinarySearch(isimler, anahtar);
+
+
+            if(i == -1)
+            {
+                Console.WriteLine("Bu isim listede mevcut değil.");
+            }
+            else
+            {
+                Console.WriteLine("Aranan isim bulundu. İndex Değeri : {0}", i);
+            }
+
+            Console.ReadLine();
+
