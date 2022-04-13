@@ -45,5 +45,15 @@
     }
     
     Console.ReadLine();
+
+            int gir;
+            int[] asal = new int[5];
+            
+            
+            for(int j=0;j<asal.Length;j++){
+                Console.WriteLine("sayı gir");
+                gir=Convert.ToInt32(Console.ReadLine());
+                asal[j]=gir;
+            }
     
     
