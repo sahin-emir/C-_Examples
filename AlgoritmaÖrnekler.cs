@@ -20,6 +20,30 @@
     enbuyuk=Math.Max(8,10);
     Console.WriteLine("sayı büyük"+enbuyuk +"sinus "+ sinus);
     
+    Console.WriteLine(" 1/ kare ALanı 2/ Kare çevresi 3/çıkış");
+    int secim=Convert.ToInt32(Console.ReadLine());
     
+    int kenar;
+    switch(secim){
+        
+        case 1:
+            Console.WriteLine("karenini kenarını giriniz");
+            kenar=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Karenin alanı"+kenar*kenar);
+            break;
+        case 2:
+            Console.WriteLine("karenin bir kenarını giriniz");
+            kenar=Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("kareçevre"+4*kenar);
+            break;
+        case 3:
+            Environment.Exit(0);
+            break;
+        default:
+            Console.WriteLine("hatalıişlem");
+            break;
+    }
+    
+    Console.ReadLine();
     
     
