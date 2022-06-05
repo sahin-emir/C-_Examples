@@ -1,10 +1,6 @@
 // combobox veri karşılaştırma
-
-
 comboBox1.Items.Add(textBox1.Text);
-
 if (comboBox1.Items.IndexOf(textBox1.Text) != -1) {
-
 //MessageBox.Show("Kayıtlı Bilgi Vardır.");
     DialogResult secenek= MessageBox.Show("Aynı ogeden var ?", "Dikkat",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
  
