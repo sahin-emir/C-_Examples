@@ -6,7 +6,7 @@ comboBox1.Items.Add(textBox1.Text);
 if (comboBox1.Items.IndexOf(textBox1.Text) != -1) {
 
 //MessageBox.Show("Kayıtlı Bilgi Vardır.");
-    DialogResult secenek= MessageBox.Show("İşlem yapılsın mı?", "Dikkat",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
+    DialogResult secenek= MessageBox.Show("Aynı ogeden var ?", "Dikkat",MessageBoxButtons.YesNo,MessageBoxIcon.Information);
  
               if (secenek == DialogResult.Yes)
               {
