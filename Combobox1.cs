@@ -67,7 +67,79 @@ if(textbox1.Text.IndexOf(",")<1)
     
     /////Veri Tabanı /////////77
     
-    
+    Class veri tabanı
+    using System.Data.SqlClient;
+
+    public SqlConnection baglanti()
+        {
+            SqlConnection baglan = new SqlConnection(@"Data Source=Z10-00;Initial Catalog=uygulama;
+            Integrated Security=True");
+            baglan.Open();
+            return baglan;
+
+        }
+                ///form codes
+                Sqlbaglantisi bgl = new Sqlbaglantisi();
+                    // btn kod secme oturum açma işlemi 
+                    SqlCommand komut = new SqlCommand("select * from kullanicilar where kullaniciadi=@p1 and sifre=@p2", bgl.baglanti());
+                    komut.Parameters.AddWithValue("@p1", textBox1.Text);
+                    komut.Parameters.AddWithValue("@p2", textBox2.Text);
+
+                        SqlDataReader dr = komut.ExecuteReader();
+
+                        if (dr.Read())
+                        {
+                            Form2 frm = new Form2();
+                            
+                            frm.kullaniciadi = textBox1.Text;frm.Show();
+                            this.Hide();
+
+                        }
+                        else
+                            MessageBox.Show("Hatalı giriş");
+
+                    }
+                    // Listeleme
+                            Sqlbaglantisi bgl = new Sqlbaglantisi();
+                            // private void Form2_Load(object sender, EventArgs e)
+                            // {
+                            //     dataGridView1.Visible = false;
+                            //     label1.Text = kullaniciadi;
+                            // }
+                            SqlCommand komut = new SqlCommand("select * from kullanicilar", bgl.baglanti());
+                            SqlDataAdapter da = new SqlDataAdapter(komut);
+
+                            DataTable dt = new DataTable();
+                            da.Fill(dt);
+                            dataGridView1.DataSource = dt;
+
+                    // ekleme
+                            SqlCommand komut = new SqlCommand("insert into kullanicilar (ogrencino,kullaniciadi,sifre) values (@p1,@p2,@p3)", bgl.baglanti());
+
+                            // komut.Parameters.AddWithValue("@p1", textBox1.Text);
+                            // komut.Parameters.AddWithValue("@p2", textBox2.Text);
+                            // komut.Parameters.AddWithValue("@p3", textBox3.Text);
+                            // komut.ExecuteNonQuery();
+                            // MessageBox.Show("Kayıt tamamlandı");
+                    // güncelleme
+                            // SqlCommand komut = new SqlCommand("update kullanicilar set kullaniciadi=@p1,sifre=@p2 where ogrencino=@p3", bgl.baglanti());
+                            // komut.Parameters.AddWithValue("@p1", textBox1.Text);
+                            // komut.Parameters.AddWithValue("@p2", textBox2.Text);
+                            // komut.Parameters.AddWithValue("@p3", textBox3.Text);
+                            // komut.ExecuteNonQuery();
+                            // MessageBox.Show("güncelleme yapıldı");
+                    // silme
+                            // SqlCommand komut = new SqlCommand("delete from kullanicilar where ogrencino=@p1", bgl.baglanti());
+                            // komut.Parameters.AddWithValue("@p1", textBox1.Text);
+
+                            // komut.ExecuteNonQuery();
+                    // datagridview işlemei
+                            // int secilen = dataGridView1.SelectedCells[0].RowIndex;
+                            //     textBox1.Text = dataGridView1.Rows[secilen].Cells[0].Value.ToString();
+                            //     textBox2.Text = dataGridView1.Rows[secilen].Cells[1].Value.ToString();
+                            // textBox3.Text = dataGridView1.Rows[secilen].Cells[2].Value.ToString();
+////////////////////77    //////  ///   ////    U/ U//////
+
     
     
     
