@@ -20,3 +20,5 @@ if (comboBox1.Items.IndexOf(textBox1.Text) != -1) {
  }
 else
 comboBox1.Items.Add(textBox1.Text);
+
+
