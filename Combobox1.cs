@@ -20,6 +20,15 @@ if (comboBox1.Items.IndexOf(textBox1.Text) != -1) {
  }
 else
 comboBox1.Items.Add(textBox1.Text);
+/////////////// faktoriyel form
+int sayi, sonuc = 1;
+            sayi = Convert.ToInt32(txtSayi.Text);
+            for(int i=1;i<=sayi;i++)
+            {
+                sonuc *= i;
+            }
+            lblSonuc.Text = sonuc.ToString();
+////////////////7
 
  // Empty
     string a = "Ahmet";
