@@ -28,8 +28,50 @@ int sayi, sonuc = 1;
                 sonuc *= i;
             }
             lblSonuc.Text = sonuc.ToString();
-////////////////7
+////////////////7///////////////////////////////////////////////////
+//// hesap makinesi;
+//Button kodlari
+if(textbox1.text="0"){
+    {
+    textbox1.Text="";
+    }
+textbox1.Text=textbox1.Text+(Button)sender).Text;
+// virgul kodlari
+if(textbox1.Text.IndexOf(",")<1)
+    {
+        textbox1.Text=textbox1.Text+",";
 
+    }
+// C silme kodu
+    textbox1.Text="0";
+ // tek tek silme
+    textbox1.Text=textbox1.Text.Substring(0,textbox1.Text.Length-1)
+    if(textbox1.Text="")
+    {
+        textbox1.Text="0";
+    }
+// toplama çoıkarma btnleri
+    sayi1=doubleParse(textbox1.Text);
+    textbox1.Text="0";
+    secim=1;
+    int secim=0;
+    
+   // Eşitttir kodu
+    sayi2=doubleParse(textbox1.Text);   
+    if(secim==1){
+        sonuc=sayi1+sayi2;
+        textbox1.Text=sonuc.ToString()
+       }
+///////////////////////////////////////////////////////////////77
+    
+    
+    /////Veri Tabanı /////////77
+    
+    
+    
+    
+    
+    // String metodları
  // Empty
     string a = "Ahmet";
     string b = "Cansever";
