@@ -1,0 +1,80 @@
+Bilgi ALma Çağrıları 
+Pek çok sistem çağrısı, aynı isimdeki glibc wrapper fonksiyonları üzerinden çağrılmaktadır.Örnek olarak sistem çağrılarını takip etmede sık kullanacağımız strace aracının çıktısındaki open() çağrısına bakalım:
+open("/tmp/index.jpeg", O_RDONLY)= 3
+Burada kastedilen glibc içerisindeki open() fonksiyonu değil, open sistem çağrısıdır. Strace üzerinden sistem çağrısına geçirilen argümanları ve geri dönüş değerini (3) görmekteyiz.
+Normalde bu yöntemle sistem çağrılarının ismi değil numarası izlenebilir. Strace uygulaması elde ettiği sistem çağrısı numarasını kendi veritabanında arayıp bizler için daha okunabilir bir formda gösterir. Strace uygulamasının bu işlemi hangi yöntemle gerçekleştirdiğine dair detaylı bilgileri ilerleyen bölümlerimizde bulabilirsiniz.
+Sistem çağrıları normal fonksiyon çağrılarına oranla oldukça yüksek maliyetli işlemlerdir.
+
+Her sistem çağrısında uygulamanın o anki durumunun saklanması, çekirdeğin işlemcinin kontrolünü ele alması ve ilgili sistem çağrısı ile çekirdek kipinde talep edilen işlemleri gerçekleştirmesi, sonra ilgili uygulamanın tekrar çalışma sırası geldiğinde, uygulamanın saklanan durumunun yeniden üretilip işlemlerin kaldığı yerden devamının sağlanması gereklidir
+
+Sistem çağrılarını glibc üzerinden kullandığımız için, glibc tarafında sistem çağrısından EINTR hatası geldiğinde,
+uygulamaya geri dönüş değeri olarak -1 dönülür fakat errno global değişkeni EINTR şeklinde ayarlanır.
+
+Bu aslında hata olmayan istisnai durum, zaman zaman pek çok uygulama kodunda gözardı edilmektedir.
+
+Bazı kullanım senaryolarında yukarıdaki senaryo istisnai olmaktan çıkıp, ilgili yazılımın doğası gereği 
+sürekli veya sıklıkla da (read, write, open, connect vb.) oluşabilir.
+
+
+Hata Ayıklama Çağrıları
+GNU Debugger
+GNU sistemlerinde standart olan, GDB (GNU Debugger) uygulamasını inceleyeceğiz. gdb bir komut satırı uygulaması olarak çalışmakta 
+ve C, C++, Objective-C, assembly ve Java olmak üzere bir çok dili desteklemektedir. gdb ayrıca, Eclipse, 
+Qt Creator, NetBeans gibi bir çok IDE ve GNU DDD (Data Display Debugger) grafik önyüz uygulaması üzerinden de kullanılabilir.
+
+gdb ile bir programın içsel durumunu inceleyebilir, işleyişine müdahale edebiliriz. Tipik olarak, kodu adım adım işletebilir,
+değişken ve yazmaçların değerlerini gözleyip değiştirebilir, kod üzerinde kesme noktaları belirleyebilir, akışa müdahale edebilir 
+ve fonksiyonların çağrılma sırasını takip edebiliriz. gdb çok sayıda komut ve seçeneği barındırmasına karşın çoğu durumda göreli
+olarak daha az bir komut setiyle bir çok işi yapabilmekteyiz. 
+
+Strace
+Unix tabanlı sistemlerde strace gibi bir uygulamanın varolabilmesi için gereken ptrace sistem çağrısı uzun yıllardır (SVr4 ve 4.3BSD) bulunmaktadır.
+
+Sistem çağrısı ismini process trace kavramından alır. ptrace sistem çağrısı üzerinden bir uygulama başka bir uygulamanın durumunu takip edebildiği gibi değişiklikler yapma imkanına da sahip olmaktadır.
+
+ptrace sistem çağrısı temel olarak gdb gibi debug uygulamalarında, strace, ltrace gibi sistem veya kütüphane çağrılarını takip uygulamalarında, code coverage araçlarında, çalışan yazılım koduna dokunmadan bazı hataların giderilmesinde veya güvenlik kontrollerinden geçirilmesinde kullanılır.
+
+ptrace çağrısıyla bir uygulamanın kontrolü tamamen başka bir uygulama verilmektedir. Buradaki kontrolden kastımız, uygulamanın kullandığı tüm bellek alanına erişim, sinyallerin alınması, değiştirilmesi, file descriptor'ların yönetimi hatta uygulamanın kod segmentinin değiştirilerek yamalar yapılması dahil aklımıza gelebilecek hemen her türden tehlikeli değişikliklere izin veriliyor olmasıdır.
+
+Bahsettiğimiz bu özelliklerinden ötürü, bir uygulamanın başka bir uygulamayı ptrace ile kontrol edebilmesi için, ilgili uygulamaya sinyal gönderme yetkisinin bulunması gerekir. Dolayısıyla özel durumlar haricinde her kullanıcının kendi sahibi olduğu diğer uygulamaları ptrace ile kontrol edebileceğini, root kullanıcısının da sistemdeki tüm uygulamaları kontrol edebileceğini söyleyebiliriz.
+
+Linux Capabilities API sisteminin geliştirilmesinden sonra yukarıda koşullardan bağımsız olarak, CAP_SYS_PTRACE özelliği sayesinde de ptrace izni verilebilmektedir.
+
+
+Proseslerde sinyal çağrıları;
+
+Sinyal çağrıları içi kullanılması gereken kütüphane;
+#include <signal.h>
+Sinyal çağrılarından sadece kill() ifadesine değineceğim için en başından şunu belirtmeliyim ki bu çağrı;
+
+kill(pid_t pid, int signal);
+
+olmak üzere 2 parametre alır. İlk parametre proses ait bilgileri tutar. İkinci parametre ise sinyal bilgisini tutar. O proses ne yaptırmak istiyorsak, signal kısmına o sinyalin adını yazmamız gerekiyor. Alttaki ifadelerden de ne demek istediğimi daha iyi anlayacaksınız.
+
+pid_t prosesID; //olsun.
+prosesID = fork(); //çocuk prosesin bilgileri artık "prosesID" ifadesi içinde saklanıyor.
+
+Artık "prosesID" ifadesini kullanarak, çocuk prosese kill() aracılığıyla istediğimiz sinyali uygulayabiliriz.
+kill(prosesID,SIGSTOP) ve kill(prosesID,SIGCONT) Çağrıları
+Bu ifadeler sayesinde, ID numarasını bildiğimiz bir prosesin işlemini istediğimiz zaman sonlandırıp, istediğimiz zaman yeniden aktif edebiliyoruz. Mesela şöyle bir örnek vereyim. Çocuk prosesin ID numarasının "prosesID" olduğunu varsayalım. Ben kill(prosesID,SIGSTOP) ifadesini kullanırsam eğer, çocuk proses duracaktır ve hiçbir iş yapamayacaktır. Taa ki biz yeniden kendisini aktif edene kadar. kill(f,SIGCONT) ifadesi ise işte burada devreye giriyor. SIGSTOP komutu ile işlem yapmasını durdurduğumuz bir prosesi SIGCONT komutu ile istediğimiz zaman yeniden aktif hale yani iş yapabilir hale getirebiliyoruz.
+
+
+
+kill(prosesID,SIGKILL) Çağrısı
+Bu ifade ile ID numarasını bildiğimiz bir prosesi istediğimiz zaman öldürebiliyoruz. Öldürdüğümüz proses bir daha işlem yapamaz ve eğer ana proses ile programın sonlanmasına sebep olur. Öldürmek istediğimiz ana prosesin ID numarasının "prosesID" olduğunu varsayalım. Bu durumda kill(f,SIGKILL) olarak kullanılır bu ifade.
+
+
+Derlediğiniz programda ID numarası yazılması gereken kısım olan "prosesID" kısmında "getpid()" ifadesini kullanabilirsiniz.
+kill(getpid(),SIGSTOP)
+kill(getpid(),SIGCONT)
+kill(getpid(),SIGKILL
+
+
+
+
+
+
+
+
+
+
