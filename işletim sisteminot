@@ -70,6 +70,34 @@ kill(getpid(),SIGCONT)
 kill(getpid(),SIGKILL
 
 
+İplik sinyal Çağrıları
+plikler kolay oluşturulup kolay yok edilirler.  Bir program yazarken, programın mevcut prosesi içinde bir iplik yaratıp birden çok işlem yapmak istiyorsanız eğer, derleyicinize;
+
+#include <pthread.h>
+kütüphanesini eklemeniz gerekiyor.
+
+Threadler yani iplikler ile işlemler yaparken bazı ifadeleri bilmeniz gerekiyor. İplikler ile işlem yaparken bu ifadeler olmazsa olmaz ifadelerdir. Programı yazmaya başladığınız zaman main kısmında öncelikli olarak yapacağınız işlemlerdir. Kısacası bu ifadeler iplik işlemlerinin demirbaş işlemleridir.
+
+pthread_t()
+İpliklere ait bilgileri tutar. Bir ipliğin sahip olması gereken tüm özellikler bu ifade ile tanımlanmış olan ifadede saklanır.
+
+pthread_create() :
+ Bu ifade ile yeni bir iplik oluşturulur. 4 farklı parametre alır.
+1. parametresi : İpliğe ait bilgileri tutan değişkenin adresini tutar.
+2. parametresi : İpliğin özelliklerini tutar. Yapacağımız örneklerde NULL olarak kalacak.
+3. parametresi : İpliğe ait olan fonksiyonun adını tutar.
+4. parametresi : İpliğimize ait olan fonksiyona değer döndereceksek eğer, 4. parametre kısmı kullanılır. Bu parametre için unutmamanız gereken en önemli özellik ise, bu parametre sadece void değerler alır. Eğer ki farklı türdeki değerler yollayacaksanız fonksiyona, ilk önce (void *)x işlemi yaparak değerinizi void türüne dönüştürmeniz gerekiyor. Videolarda bunu daha iyi anlayacaksınız zaten.
+
+pthread_join() 
+"İpliğin işlemini bitirmesini bekle" anlamına gelir. Eğer iplik kullanarak bir program yazacaksanız bu ifade olmazsa olmaz bir ifadedir. Bu ifade sayesinde iplik işini bitirmeden proses sonlanmaz. Bu ifade 2 parametre alır.
+
+1. paremetresi : İpliğe ait bilgileri tutan değişkenin kendisini tutar.
+2. parametresi : Geri dönüş değerlerini tutar. Eğer ipliğinizin geri dönüş değeri var ise, ikinci parametre bu veriyi tutar. Yarattığınız thread geriye değer döndermiyor ise eğer, bu parametreye NULL yazılır.
+
+pthread_exit()
+İçine void değerler alır. İpliğin geri dönüş değerini tutarlar. Geri dönüş değeri yok ise içine NULL yazılır.
+
+
 
 
 
