@@ -1,0 +1,45 @@
+int ukenar=0,kkenar=0;
+    Console.Write("Diktörgenin uzun kenarını giriniz:");
+    ukenar = Convert.ToInt32 (Console.ReadLine());
+    Console.Write("Diktörgenin kısa kenarını giriniz:");
+    kkenar = Convert.ToInt32 (Console.ReadLine());
+    Console.WriteLine("Çevre= {0}", ((ukenar + kkenar)*2).ToString());
+    Console.WriteLine("Alan= {0}", (ukenar*kkenar).ToString());
+    Console.ReadKey();
+    
+     double derece = 30;
+            double radyan = derece * (Math.PI / 180);
+            double sinus = Math.Sin(radyan);
+                       
+            Console.WriteLine(sinus);
+            
+            Console.ReadLine();
+    int sayi1, kalan;
+            string yazikalan = "";
+            Console.WriteLine("10'luk Sistemden 2'lik Sisteme Çeviren Program");
+            Console.WriteLine("www.yazilimkodlama.com");
+            Console.Write("Sayıyı Giriniz..:");
+            sayi1 = Convert.ToInt32(Console.ReadLine());
+            while (sayi1 != 0)
+            {
+                kalan = sayi1 % 2;
+                sayi1 = sayi1 / 2;
+ 
+                yazikalan = kalan.ToString() + yazikalan;
+                //Console.WriteLine("2'lik Sistem: {0}", kalan);
+            }
+            Console.WriteLine("2'lik Sistemde Karşılığı : {0}", yazikalan);
+ 
+            Console.ReadKey()
+            
+            
+            string metin;
+            Console.Write("Metni Girin  : ");
+            metin = Console.ReadLine();
+            string[] kelimeler = metin.Split(' ');
+            Console.WriteLine("Kelime Sayısı :"+kelimeler.Length);
+            foreach(string kelime in kelimeler)
+            {
+                Console.WriteLine(kelime);
+            }
+            Console.ReadKey();
