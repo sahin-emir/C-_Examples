@@ -1,3 +1,6 @@
+Random rastgele = new Random();
+int tutulanSayi = rastgele.Next(0, 1000);
+
 int toplam = 0; 
   for (int i = 2; i <= 50; i += 3) 
   { 
