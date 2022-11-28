@@ -1,0 +1,18 @@
+CREATE TABLE personel (
+ perid int IDENTITY(1,1) not null primary key,
+ peradi varchar(15),
+ persoyad varchar(20),
+ perdepart varchar(30),
+ pertel varchar(20),
+ peradres varchar(100) 
+);
+Tabloya yeni kolon eklemek:
+Mevcut tablomuza yeni bir alan eklemek için kullanilan genel ifade:.
+Alter Table Personel Add dogyer varchar(20) 
+INSERT INTO Personel (peradi, persoyad, perdepart, pertel, peradres,dogyer) 
+VALUES 
+('Mehmet', 'KURU', 'Finansman', '532 456 66 96','Beşiktaş','Kadıköy'),
+(‘Aslı', 'KARA', ‘Bilgi işlem', '530 344 56 77',‘Bahçelievler',‘Bakırköy'),
+(‘Ayşe', ‘DENİZ', ‘Reklam', '505 045 11 45',‘Üsküdar',‘Kadıköy')
+DELETE FROM personel WHERE perdepart='Muhasebe';
+UPDATE Personel SET perdogtar=1978, perdogyer='İzmir' WHERE perid=10
