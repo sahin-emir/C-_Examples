@@ -1,0 +1,214 @@
+using System;
+
+namespace Soru4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            cıkarma hesap1 = new cıkarma();
+            toplama top1 = new toplama();
+            int sayi1 = 50;
+            int sayi2 = 60;
+            hesap1.islem(sayi1, sayi2);
+            top1.islem(sayi1, sayi2);
+        }
+    }
+    class cıkarma
+    {
+        public int sayi1;
+        public int sayi2;
+        int  sonuc=0;
+        
+        public void islem(int sayi1, int sayi2)
+        {
+             sonuc = sayi1 - sayi2;
+             Console.WriteLine(sonuc);
+
+        }
+
+    }
+    class toplama
+    {
+        public int sayi1;
+        public int sayi2;
+        public int sonuc = 0;
+        public void islem(int sayi1,int sayi2)
+        {
+            sonuc = sayi1 +sayi2;
+            Console.WriteLine(sonuc);
+
+        }
+
+
+    }
+}
+
+using System;
+
+namespace soru3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            bilgisayar b1 = new bilgisayar();
+            b1.marka="casper";
+            b1.model = 70;
+            b1.rengi = "siyah";
+            b1.özellik();
+
+        }
+    }
+    class bilgisayar
+    {
+        public int model;
+        public string marka;
+        public string rengi;
+        
+        public void özellik()
+        {
+            Console.WriteLine(marka);
+            Console.WriteLine(model);
+            Console.WriteLine(rengi);
+        }
+
+    }
+}
+
+using System;
+
+namespace Soru2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            ucgen ucgenhesap = new ucgen();
+            ucgenhesap.Kenar1 = Convert.ToInt32(Console.ReadLine());
+            ucgenhesap.Kenar2 = Convert.ToInt32(Console.ReadLine());
+            double alan = 0.0, cevre=0.0;
+            Dikdortgen dikdortgenhesap = new Dikdortgen();
+            dikdortgenhesap.Kisa = Convert.ToInt32(Console.ReadLine());
+            dikdortgenhesap.Uzun= Convert.ToInt32(Console.ReadLine());
+
+            alan=ucgenhesap.AlanHesapla();
+            cevre= ucgenhesap.CevreHesapla();
+            Console.WriteLine("Üçgen çevre" + cevre);
+            Console.WriteLine("ucgen alan " + alan);
+
+            alan = dikdortgenhesap.Alan();
+            cevre = dikdortgenhesap.Cevre();
+            Console.WriteLine("dikdortgen alan" + alan);
+            Console.WriteLine("dikdortegen cevre" + cevre);
+
+
+
+
+        }
+    }
+    class ucgen
+    {
+        double kenar1;
+        double kenar2;
+
+        public double Kenar1
+        {
+            get
+            {
+                return kenar1;
+            }
+
+            set
+            {
+                kenar1 = value;
+            }
+        }
+
+        public double Kenar2
+        {
+            get
+            {
+                return kenar2;
+            }
+
+            set
+            {
+                kenar2 = value;
+            }
+        }
+
+        public double AlanHesapla()
+        {
+            return (kenar1 * kenar2) / 2;
+        }
+
+        public double CevreHesapla()
+        {
+            double hipotenus = Math.Sqrt(Math.Pow(kenar1, 2) + (Math.Pow(kenar2, 2)));
+            return (kenar1 + kenar2 + hipotenus);
+        }
+    }
+    class Dikdortgen
+    {
+        int kisa;
+        int uzun;
+
+        public int Kisa { get => kisa; set => kisa = value; }
+        public int Uzun { get => uzun; set => uzun = value; }
+
+        public int Alan()
+        {
+            return kisa * uzun;
+        }
+
+        public int Cevre()
+        {
+            return (kisa + uzun) * 2;
+        }
+    }
+}
+
+using System;
+
+namespace ConsoleApp1
+{
+
+    class Ogrenci
+    {
+        // Özelliklere diğer sınıflardan erişebiliriz. (Public
+        public string AdSoyad;
+        public int Numara;
+        public int Sinif;
+        public void Bilgi()
+        {
+            Console.WriteLine("Öğrencinin Adı:{0}", AdSoyad);
+            Console.WriteLine("Öğrencinin Numarası:{0}", Numara);
+            Console.WriteLine("Öğrencinin Sınıfı:{0}", Sinif);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Ogrenci ogr1 = new Ogrenci();
+            ogr1.AdSoyad = Console.ReadLine();
+            ogr1.Numara = Convert.ToInt32(Console.ReadLine());
+            ogr1.Sinif = Convert.ToInt32(Console.ReadLine());
+
+            // Nesne içerisindeki Bilgi() metodunu çağırarak atamış olduğumuz değerleri ekrana yazdırdık.
+
+            ogr1.Bilgi();
+            Console.WriteLine(new string('-', 30));
+
+
+        }
+    }
+}
+
+
+
+
+
