@@ -40,3 +40,30 @@ int mevcut=0;
             int no=Array.IndexOf(ogrno,aranan.ToString());
             
             Console.WriteLine(" aranan kişi, isim {0},{1}",isim[no],telefon[no],mail[no]);
+            
+class Ogrenci
+    {
+        // Özelliklere diğer sınıflardan erişebiliriz. (Public
+        public string AdSoyad;
+        public int Numara;
+        public int Sinif;
+        public void Bilgi()
+        {
+            Console.WriteLine("Öğrencinin Adı:{0}", AdSoyad);
+            Console.WriteLine("Öğrencinin Numarası:{0}", Numara);
+            Console.WriteLine("Öğrencinin Sınıfı:{0}", Sinif);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Ogrenci ogr1 = new Ogrenci();
+            ogr1.AdSoyad = Console.ReadLine();
+            ogr1.Numara = Convert.ToInt32(Console.ReadLine());
+            ogr1.Sinif = Convert.ToInt32(Console.ReadLine());
+
+            // Nesne içerisindeki Bilgi() metodunu çağırarak atamış olduğumuz değerleri ekrana yazdırdık.
+
+            ogr1.Bilgi();
+            Console.WriteLine(new string('-', 30));
