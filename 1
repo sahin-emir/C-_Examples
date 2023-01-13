@@ -1,0 +1,37 @@
+int mevcut=0;
+    Console.WriteLine("sınıf mevcudu giriniz ");
+    mevcut=Convert.ToInt32(Console.ReadLine());
+    
+    String[] ogrenci=new string[mevcut];
+    
+    for(int i=0;i<mevcut;i++){
+        Console.WriteLine("adı girin");
+        ogrenci[i]=Console.ReadLine();
+        
+    }
+    
+            int pozitif = 0;
+            int negatif = 0;
+            int notr = 0;
+            Random rnd = new Random();
+ 
+            int[] sayilar = new int[20];
+ 
+            for (int i = 0; i < 20;i++ )
+            {
+                sayilar[i] = rnd.Next(-100, 100);
+            }
+            foreach (int sayi in sayilar)
+            {
+                Console.WriteLine(sayi);
+            }
+  string[] ogrno = { "101", "102", "103" };
+            string[] isim ={"Ali","Veli","Hasan"};
+            string[] telefon = {"111","222","333"};
+            string[] mail = { "aaaa@aaa.aa", "bbbbb@bbb.bb", "cccc@cc.cc"};
+            
+            Console.WriteLine("kişi no gir ");
+            string aranan= Console.ReadLine();
+            int no=Array.IndexOf(ogrno,aranan.ToString());
+            
+            Console.WriteLine(" aranan kişi, isim {0},{1}",isim[no],telefon[no],mail[no]);
